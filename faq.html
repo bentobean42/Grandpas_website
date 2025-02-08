@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Wood Staining Services</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="faq-page">
+    <!-- Sidebar Tab - Always visible -->
+    <div class="sidebar-tab">
+        <a href="#" aria-label="Toggle Sidebar">☰</a> <!-- Menu icon -->
+    </div>
+
+    <!-- Sidebar Content -->
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="faq.html" class="active">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <header>
+        <h1>FAQ</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="faq.html" class="active">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-box">
+            <h2>Frequently Asked Questions</h2>
+            <p>Here are some common questions and answers about our services.</p>
+
+            <!-- FAQ Items -->
+            <div class="faq-item">
+                <div class="question">What type of furniture can be refinished and what type can't?</div>
+                <div class="answer">All solid wood can be restored, any furniture that is either veneer or cheaper grade, it's a lot harder, but the look can be altered.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Can I change my painted cabinets into stained cabinets?</div>
+                <div class="answer">Yes, it is possible, but I will evaluate and see if it's cost-effective.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Can stained cabinets be painted?</div>
+                <div class="answer">Yes, it can without a lot of sanding.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How long do kitchen cabinets usually take?</div>
+                <div class="answer">On average, one to two weeks.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Is spraying or brushing better?</div>
+                <div class="answer">Sprayed looks factory finished but has its drawbacks. For example, any damage can be easily done, whereas a brushed look is 100% material on surfaces and a lot easier to touch up. I specialize in brush services with hardly any brush marks but will spray if desired. I prefer to brush.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Wood Staining Services</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="faq.html" class="active">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <!-- JavaScript to Toggle FAQ Answers -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.question').forEach((question) => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+
+                    if (answer) {
+                        answer.classList.toggle('open'); // Toggle the 'open' class for answers
+                    } else {
+                        console.error("Answer not found for:", question.textContent);
+                    }
+                });
+            });
+        });
+
+        // JavaScript to Toggle Sidebar
+        document.querySelector('.sidebar-tab').addEventListener('click', function () {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
