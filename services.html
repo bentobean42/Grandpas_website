@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Wood Staining Services</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="services-page">
+    <!-- Sidebar Tab - Always visible -->
+    <div class="sidebar-tab">
+        <a href="#" aria-label="Toggle Sidebar">☰</a> <!-- Menu icon -->
+    </div>
+
+    <!-- Sidebar Content -->
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <header>
+        <h1>Our Services</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-box">
+            <h2>What We Offer</h2>
+            <div class="services-grid">
+                <article class="service-item">
+                    <h3>Custom Wood Staining</h3>
+                    <p>Enhance the natural beauty of wood with expert staining techniques tailored to your preferences.</p>
+                </article>
+                <article class="service-item">
+                    <h3>Furniture Refinishing</h3>
+                    <p>Restore and rejuvenate your cherished furniture pieces with our meticulous refinishing services.</p>
+                </article>
+                <article class="service-item">
+                    <h3>Wood Restoration</h3>
+                    <p>Repair and renew wood surfaces to bring back their original charm or achieve a brand-new look.</p>
+                </article>
+                <article class="service-item">
+                    <h3>Specialized Projects</h3>
+                    <p>Expertise in kitchen cabinets, front doors, and all types of wood furniture for a flawless finish.</p>
+                </article>
+                <article class="service-item">
+                    <h3>Touch-Up Services</h3>
+                    <p>Precision touch-ups to repair minor damage, scratches, or wear for a polished appearance.</p>
+                </article>
+                <article class="service-item">
+                    <h3>Consultations</h3>
+                    <p>Personalized advice to help you choose the best finishes and solutions for your project.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>2024 Wood Staining Services</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <!-- JavaScript to Toggle Sidebar -->
+    <script>
+        document.querySelector('.sidebar-tab').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
