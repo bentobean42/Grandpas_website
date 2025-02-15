@@ -48,10 +48,24 @@
             <p>We specialize in bringing the natural beauty of wood to life through custom staining, furniture restoration, and more.</p>
         </section>
 
-</main>
-    
+        <!-- Video Section -->
+        <div class="video-container">
+            <video id="video1" controls autoplay muted>
+                <source src="videos/video1.webm" type="video/webm">
+                <source src="videos/video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <video id="video2" class="hidden-video" controls muted>
+                <source src="videos/video2.webm" type="video/webm">
+                <source src="videos/video2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </main>
+
     <footer>
-        <p>2024 Woodworking Services</p>
+        <p>© 2024 Woodworking Services</p>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -64,11 +78,29 @@
         </nav>
     </footer>
 
-    <!-- JavaScript to Toggle Sidebar -->
+    <!-- JavaScript -->
     <script>
-        document.querySelector('.sidebar-tab').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('open');
+        document.addEventListener("DOMContentLoaded", function () {
+            // Sidebar toggle
+            document.querySelector('.sidebar-tab').addEventListener('click', function() {
+                document.querySelector('.sidebar').classList.toggle('open');
+            });
+
+            // Video transition logic
+            const video1 = document.getElementById("video1");
+            const video2 = document.getElementById("video2");
+
+            video1.addEventListener("ended", function () {
+                video1.classList.add("fade-out");
+                setTimeout(() => {
+                    video1.style.display = "none";
+                    video2.style.display = "block";
+                    video2.classList.add("fade-in");
+                    video2.play();
+                }, 1000);
+            });
         });
     </script>
+
 </body>
 </html>
