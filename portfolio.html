@@ -173,8 +173,12 @@
 
     <!-- JavaScript -->
     <script>
+        <script>
     const images = [];
-        const batches = ["batch1", "batch2"];
+    const imagesPerPage = 12; // ✅ Add this to define imagesPerPage
+    let currentImageIndex = 0; // ✅ Add this to track the index
+    const batches = ["batch1", "batch2"];
+
 
         // Custom Stain Projects (inside batch1 & batch2)
         for (let batch of batches) {
