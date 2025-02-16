@@ -174,19 +174,20 @@
     <!-- JavaScript -->
     <script>
     const images = [];
-    const imagesPerPage = 12; // Number of images to load per scroll
-    let currentImageIndex = 0;
+        const batches = ["batch1", "batch2"];
+
+        // Custom Stain Projects (inside batch1 & batch2)
+        for (let batch of batches) {
+            for (let i = 1; i <= 120; i++) {
+                images.push({ src: `images/${batch}/custom-stain-projects/Custom-stain${i}.jpeg`, category: "custom-stain-projects" });
+            }
+        }
 
     // Generate images dynamically
 
     // Custom Projects (59 images)
     for (let i = 1; i <= 59; i++) {
         images.push({ src: `images/custom-projects/Custom${i}.jpeg`, category: "custom-projects" });
-    }
-
-    // Custom Stain Projects (121 images)
-    for (let i = 1; i <= 121; i++) {
-        images.push({ src: `images/custom-stain-projects/Custom-Stain${i}.jpeg`, category: "custom-stain-projects" });
     }
 
     // Furniture Restoration (21 images)
