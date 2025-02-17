@@ -410,3 +410,41 @@ footer {
 .right-arrow {
     right: 10px;
 }
+.contact-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: center;
+}
+
+.contact-button {
+    display: block;
+    background-color: #8B4513;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #654321;
+}
+
+/* Style the phone number */
+.phone-number {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.phone-number a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.phone-number a:hover {
+    color: #8B4513; /* Brown color on hover */
+}
