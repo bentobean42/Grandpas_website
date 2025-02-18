@@ -465,3 +465,82 @@ footer {
 .hidden-video {
     display: none;
 }
+/* ✅ MOBILE MENU FIX */
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Hide menu initially */
+        flex-direction: column;
+        background-color: #8B4513;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 60px;
+        text-align: center;
+        z-index: 1000;
+    }
+
+    nav ul.show {
+        display: flex; /* Show when menu is toggled */
+    }
+
+    nav ul li {
+        display: block;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+        font-size: 30px;
+        color: white;
+        padding: 10px;
+        text-align: right;
+        margin-right: 20px;
+    }
+}
+
+/* ✅ MAKE IMAGES & VIDEOS RESPONSIVE */
+img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+/* ✅ FIX GALLERY GRID ON MOBILE */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: 1fr; /* Make images stack in a single column */
+    }
+}
+
+/* ✅ MAKE BUTTONS BIGGER ON MOBILE */
+@media (max-width: 768px) {
+    button, .filter-buttons button {
+        padding: 15px 20px;
+        font-size: 18px;
+        width: 100%; /* Make buttons full width */
+        margin: 5px 0;
+    }
+}
+
+/* ✅ ADJUST MAIN CONTENT WIDTH */
+@media (max-width: 768px) {
+    main {
+        width: 90%;
+        padding: 10px;
+    }
+
+    h1, h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+}
+
+/* ✅ MAKE SIDEBAR SMALLER ON MOBILE */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80%; /* Reduce sidebar width */
+    }
+}
