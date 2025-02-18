@@ -58,14 +58,14 @@
 <div class="video-container">
     <!-- YouTube Video 1 -->
     <iframe id="video1" width="560" height="315" 
-        src="https://www.youtube.com/embed/GFfnZ1NFyIo" 
-        frameborder="0" allowfullscreen>
+        src="https://www.youtube.com/embed/GFfnZ1NFyIo?enablejsapi=1&autoplay=1" 
+        frameborder="0" allow="autoplay" allowfullscreen>
     </iframe>
 
     <!-- YouTube Video 2 (Initially Hidden) -->
     <iframe id="video2" class="hidden-video" width="560" height="315" 
-        src="https://www.youtube.com/embed/t_lvAi0V9tk" 
-        frameborder="0" allowfullscreen>
+        src="https://www.youtube.com/embed/t_lvAi0V9tk?enablejsapi=1" 
+        frameborder="0" allow="autoplay" allowfullscreen>
     </iframe>
 </div>
 
@@ -88,21 +88,50 @@
 
     <!-- JavaScript -->
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Sidebar toggle
-        document.querySelector('.sidebar-tab').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('open');
+document.addEventListener("DOMContentLoaded", function () {
+    let video1 = document.getElementById("video1");
+    let video2 = document.getElementById("video2");
+    let player1, player2;
+
+    // Load YouTube API
+    function onYouTubeIframeAPIReady() {
+        player1 = new YT.Player('video1', {
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
         });
 
-        // YouTube Video Transition Logic
-        const video1 = document.getElementById("video1");
-        const video2 = document.getElementById("video2");
+        player2 = new YT.Player('video2', {
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
 
-        setTimeout(() => {
-            video1.style.display = "none"; 
-            video2.style.display = "block"; 
-        }, 10000); // Change after 10 seconds (adjust as needed)
-    });
+    // Handle video state change
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+            if (event.target === player1) {
+                video1.style.display = "none";
+                video2.style.display = "block";
+                player2.playVideo();
+            } else if (event.target === player2) {
+                video2.style.display = "none";
+                video1.style.display = "block";
+                player1.playVideo();
+            }
+        }
+    }
+
+    // Load the YouTube IFrame Player API
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Make the API function available globally
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+});
 </script>
 
 
