@@ -453,3 +453,15 @@ footer {
         max-width: 100%; /* Full width on small screens */
     }
 }
+.video-container video {
+    width: 100%;
+    max-width: 600px; /* Reduce the max width */
+    height: auto; /* Keeps aspect ratio */
+    display: block;
+    margin: 0 auto; /* Centers the video */
+}
+
+
+.hidden-video {
+    display: none;
+}
