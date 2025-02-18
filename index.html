@@ -55,17 +55,19 @@
         </section>
 
         <!-- Video Section -->
-        <div class="video-container">
-            <video id="video1" controls autoplay muted>
-                <source src="videos/test.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+<div class="video-container">
+    <!-- YouTube Video 1 -->
+    <iframe id="video1" width="560" height="315" 
+        src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" 
+        frameborder="0" allowfullscreen>
+    </iframe>
 
-            <video id="video2" class="hidden-video" controls muted>
-                <source src="videos/video2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
+    <!-- YouTube Video 2 (Initially Hidden) -->
+    <iframe id="video2" class="hidden-video" width="560" height="315" 
+        src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2" 
+        frameborder="0" allowfullscreen>
+    </iframe>
+</div>
     </main>
 
     <footer>
