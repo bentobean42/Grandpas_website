@@ -35,3 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         carouselImages.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
     }
 </script>
+    <script>
+function toggleMenu() {
+    document.getElementById("nav-menu").classList.toggle("show");
+}
+</script>
