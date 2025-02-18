@@ -185,11 +185,11 @@
 
 
         // Custom Stain Projects (inside batch1 & batch2)
-        for (let batch of batches) {
-            for (let i = 1; i <= 120; i++) {
-                images.push({ src: `images/${batch}/custom-stain-projects/Custom-stain${i}.jpeg`, category: "custom-stain-projects" });
-            }
-        }
+        for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
+    for (let i = 1; i <= 60; i++) { // ✅ Now each batch only loads 60 images
+        images.push({ src: `images/${batches[batchIndex]}/custom-stain-projects/Custom-stain${i}.jpeg`, category: "custom-stain-projects" });
+    }
+}
 
     // Generate images dynamically
 
