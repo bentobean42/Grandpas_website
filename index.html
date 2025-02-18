@@ -87,27 +87,23 @@
 
     <!-- JavaScript -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Sidebar toggle
-            document.querySelector('.sidebar-tab').addEventListener('click', function() {
-                document.querySelector('.sidebar').classList.toggle('open');
-            });
-
-            // Video transition logic
-            const video1 = document.getElementById("video1");
-            const video2 = document.getElementById("video2");
-
-            video1.addEventListener("ended", function () {
-                video1.classList.add("fade-out");
-                setTimeout(() => {
-                    video1.style.display = "none";
-                    video2.style.display = "block";
-                    video2.classList.add("fade-in");
-                    video2.play();
-                }, 1000);
-            });
+    document.addEventListener("DOMContentLoaded", function () {
+        // Sidebar toggle
+        document.querySelector('.sidebar-tab').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('open');
         });
-    </script>
+
+        // YouTube Video Transition Logic
+        const video1 = document.getElementById("video1");
+        const video2 = document.getElementById("video2");
+
+        setTimeout(() => {
+            video1.style.display = "none"; 
+            video2.style.display = "block"; 
+        }, 10000); // Change after 10 seconds (adjust as needed)
+    });
+</script>
+
 
 </body>
 </html>
