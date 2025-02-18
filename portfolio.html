@@ -186,100 +186,115 @@ function toggleMenu() {
     <!-- JavaScript -->
     <script>
     const images = [];
-    const imagesPerPage = 12; // ✅ Add this to define imagesPerPage
-    let currentImageIndex = 0; // ✅ Add this to track the index
-    const batches = ["batch1", "batch2"];
+const imagesPerPage = 12; 
+let currentImageIndex = 0; 
+const batches = ["batch1", "batch2"];
 
-
-        // Custom Stain Projects (inside batch1 & batch2)
-        for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
-    for (let i = 1; i <= 60; i++) { // ✅ Now each batch only loads 60 images
+// Custom Stain Projects (inside batch1 & batch2)
+for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
+    for (let i = 1; i <= 60; i++) {
         images.push({ src: `images/${batches[batchIndex]}/custom-stain-projects/Custom-stain${i}.jpeg`, category: "custom-stain-projects" });
     }
 }
 
-    // Generate images dynamically
+// Custom Projects (59 images)
+for (let i = 1; i <= 59; i++) {
+    images.push({ src: `images/custom-projects/Custom${i}.jpeg`, category: "custom-projects" });
+}
 
-    // Custom Projects (59 images)
-    for (let i = 1; i <= 59; i++) {
-        images.push({ src: `images/custom-projects/Custom${i}.jpeg`, category: "custom-projects" });
+// Furniture Restoration (21 images)
+for (let i = 1; i <= 21; i++) {
+    images.push({ src: `images/furniture-restoration/Furniture${i}.jpeg`, category: "furniture-restoration" });
+}
+
+// Kitchen Cabinets (26 images)
+for (let i = 1; i <= 26; i++) {
+    images.push({ src: `images/kitchen-cabinets/Kitchen${i}.jpeg`, category: "kitchen-cabinets" });
+}
+
+// Function to load images dynamically
+function loadImages(startIndex, count) {
+    const gallery = document.getElementById('image-gallery');
+    for (let i = startIndex; i < startIndex + count && i < images.length; i++) {
+        const imgElement = document.createElement('img');
+        imgElement.src = images[i].src;
+        imgElement.classList.add('filter-item', images[i].category);
+        imgElement.alt = "Project Image";
+        imgElement.loading = "lazy";
+        imgElement.onclick = () => openLightbox(imgElement);
+        gallery.appendChild(imgElement);
     }
+    applyFilter(currentFilter); // ✅ Apply filter after images are loaded
+}
 
-    // Furniture Restoration (21 images)
-    for (let i = 1; i <= 21; i++) {
-        images.push({ src: `images/furniture-restoration/Furniture${i}.jpeg`, category: "furniture-restoration" });
+// Function to load more images when scrolling
+function loadMoreImages() {
+    loadImages(currentImageIndex, imagesPerPage);
+    currentImageIndex += imagesPerPage;
+
+    if (currentImageIndex >= images.length) {
+        window.removeEventListener("scroll", onScrollLoadMore);
     }
+}
 
-    // Kitchen Cabinets (26 images)
-    for (let i = 1; i <= 26; i++) {
-        images.push({ src: `images/kitchen-cabinets/Kitchen${i}.jpeg`, category: "kitchen-cabinets" });
+// Function to check if the user has scrolled to the bottom
+function onScrollLoadMore() {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        loadMoreImages();
     }
+}
 
-    // Function to load images dynamically
-    function loadImages(startIndex, count) {
-        const gallery = document.getElementById('image-gallery');
-        for (let i = startIndex; i < startIndex + count && i < images.length; i++) {
-            const imgElement = document.createElement('img');
-            imgElement.src = images[i].src;
-            imgElement.classList.add('filter-item', images[i].category);
-            imgElement.alt = "Project Image";
-            imgElement.loading = "lazy"; // Enables lazy loading for faster performance
-            imgElement.onclick = () => openLightbox(imgElement);
-            gallery.appendChild(imgElement);
+// ✅ Track the current filter selection
+let currentFilter = "all";
+
+// Function to filter images based on category
+function filterImages(category) {
+    currentFilter = category; // ✅ Store the selected filter
+    applyFilter(category);
+}
+
+function applyFilter(category) {
+    const allImages = document.querySelectorAll('.gallery img');
+    allImages.forEach(img => {
+        img.style.display = "none";
+        if (category === "all" || img.classList.contains(category)) {
+            img.style.display = "block";
         }
-    }
-
-    // Function to check if the user has scrolled to the bottom
-    function onScrollLoadMore() {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-            loadMoreImages();
-        }
-    }
-
-    // Function to load more images when scrolling
-    function loadMoreImages() {
-        loadImages(currentImageIndex, imagesPerPage);
-        currentImageIndex += imagesPerPage;
-
-        // Stop loading if all images are displayed
-        if (currentImageIndex >= images.length) {
-            window.removeEventListener("scroll", onScrollLoadMore);
-        }
-    }
-
-    // Function to filter images based on category
-    function filterImages(category) {
-        const allImages = document.querySelectorAll('.gallery img');
-        allImages.forEach(img => {
-            img.style.display = "none"; // Hide all images first
-            if (category === "all" || img.classList.contains(category)) {
-                img.style.display = "block"; // Show only matching images
-            }
-        });
-    }
-
-    // Function to open Lightbox
-    function openLightbox(img) {
-        const lightboxImg = document.getElementById('lightbox-img');
-        lightboxImg.src = img.src;
-        lightboxImg. alt = img.alt;
-        document.getElementById('lightbox').style.display = 'flex';
-    }
-
-    // Function to close Lightbox
-    function closeLightbox() {
-        document.getElementById('lightbox').style.display = 'none';
-    }
-
-    // Load initial images on page load
-    document.addEventListener("DOMContentLoaded", () => {
-        loadImages(0, imagesPerPage);
-        currentImageIndex += imagesPerPage;
-        window.addEventListener("scroll", onScrollLoadMore);
     });
-        document.querySelector('.sidebar-tab').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('open');
+}
+
+// Function to open Lightbox
+function openLightbox(img) {
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    document.getElementById('lightbox').style.display = 'flex';
+}
+
+// Function to close Lightbox
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+
+// Load initial images on page load
+document.addEventListener("DOMContentLoaded", () => {
+    loadImages(0, imagesPerPage);
+    currentImageIndex += imagesPerPage;
+    window.addEventListener("scroll", onScrollLoadMore);
+
+    // ✅ Ensure filters work from the start
+    document.querySelectorAll(".filter-buttons button").forEach(button => {
+        button.addEventListener("click", function () {
+            const category = this.getAttribute("onclick").match(/'([^']+)'/)[1];
+            filterImages(category);
         });
-</script>
+    });
+});
+
+// Sidebar toggle
+document.querySelector('.sidebar-tab').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('open');
+});
+    </script>
 </body>
 </html>
