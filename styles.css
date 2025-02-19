@@ -13,7 +13,7 @@
     text-align: center;
     line-height: 30px;
     transition: background-color 0.3s;
-    z-index: 10000;
+    z-index: 10;
     border-radius: 5px;
 }
 
@@ -30,7 +30,7 @@
 /* Sidebar Styles */
 .sidebar {
     height: 100%;
-    width: 250px;
+    width: 0;
     position: fixed;
     top: 0;
     left: 0;
@@ -39,7 +39,7 @@
     transition: width 0.3s;
     padding-top: 60px;
     visibility: hidden;
-    z-index: 9999;
+    z-index: 9;
 }
 
 .sidebar.open {
@@ -69,12 +69,6 @@
     font-weight: bold;
     color: #FFD700;
 }
-/* Ensure sidebar does not block content */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 75%;
-    }
-}
 
 /* Body and Background Image */
 body {
@@ -88,23 +82,10 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    padding-top: 70px;
 }
 
 /* Header and Footer */
-header {
-    background-color: #bf8040;
-    color: white;
-    padding: 15px 0;
-    text-align: center;
-    width: 100%;
-    z-index: 10000;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-footer {
+header, footer {
     background-color: #bf8040;
     color: white;
     padding: 20px;
@@ -490,13 +471,12 @@ footer {
         display: none; /* Hide menu initially */
         flex-direction: column;
         background-color: #8B4513;
-        position: fixed;
+        position: absolute;
         width: 100%;
         left: 0;
         top: 60px;
         text-align: center;
         z-index: 1000;
-        transition: all 0.3s ease-in-out;
     }
 
     nav ul.show {
@@ -518,8 +498,6 @@ footer {
         text-align: right;
         margin-right: 20px;
     }
-     body.menu-open main {
-        margin-top: 200px;
 }
 
 /* ✅ MAKE IMAGES & VIDEOS RESPONSIVE */
@@ -565,65 +543,4 @@ img, video {
     .sidebar {
         width: 80%; /* Reduce sidebar width */
     }
-}
-    /* Ensure gallery images are full width on mobile */
-@media (max-width: 768px) {
-    .gallery {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .gallery img {
-        width: 100%;
-    }
-}
-    /* Adjust main content box for mobile */
-@media (max-width: 768px) {
-    .content-box {
-        width: 90%;
-        padding: 15px;
-        text-align: left;
-    }
-
-    h1, h2 {
-        font-size: 1.5rem;
-        text-align: center;
-    }
-
-    p {
-        font-size: 1rem;
-    }
-}
-/* Fix button sizing for better usability on mobile */
-@media (max-width: 768px) {
-    button, .filter-buttons button {
-        padding: 15px 20px;
-        font-size: 18px;
-        width: 100%;
-        margin: 5px 0;
-    }
-}
-    /* Ensure images & videos scale properly */
-img, video {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: auto;
-}
-/* Responsive Video Wrapper */
-.video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* Maintains 16:9 Aspect Ratio */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-    background: #000;
-}
-
-.video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
 }
