@@ -100,7 +100,7 @@ header, footer {
     text-align: center;
     width: 100%;
     z-index: 1;
-    position: fixed;
+    position: relative;
 }
 
 header h1, footer p {
