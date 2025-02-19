@@ -83,7 +83,15 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
-
+header {
+    position: fixed; /* Fixes the header at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #bf8040;
+    padding: 15px 20px;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
 /* Header and Footer */
 header, footer {
     background-color: #bf8040;
@@ -131,6 +139,7 @@ main {
     flex: 1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    margin-top: 80px; /* Pushes main content down to avoid overlap */
 }
 
 /* About Page Styles */
@@ -460,7 +469,17 @@ footer {
     display: block;
     margin: 0 auto; /* Centers the video */
 }
-
+.video-container iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* Ensures proper aspect ratio */
+}
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Adjust width as needed */
+    margin: 0 auto; /* Centers the video */
+}
 
 .hidden-video {
     display: none;
