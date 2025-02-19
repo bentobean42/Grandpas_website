@@ -562,3 +562,18 @@ img, video {
         width: 80%; /* Reduce sidebar width */
     }
 }
+@media (max-width: 768px) {
+    header {
+        position: relative; /* Prevents fixed header issues on mobile */
+    }
+
+    main {
+        margin-top: 20px; /* Less margin needed on mobile */
+    }
+
+    .contact-info {
+        position: static; /* Places it in normal flow */
+        text-align: center;
+        margin-top: 10px;
+    }
+}
