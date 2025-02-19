@@ -92,7 +92,19 @@ body {
 }
 
 /* Header and Footer */
-header, footer {
+header {
+    background-color: #bf8040;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+    z-index: 10000;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+footer {
     background-color: #bf8040;
     color: white;
     padding: 20px;
