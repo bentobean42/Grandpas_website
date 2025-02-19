@@ -430,9 +430,13 @@ footer {
 }
 
 .contact-button {
-    display: inline-block;
-    padding: 12px 20px;
-    font-size: 16px;
+    display: block;
+    background-color: #8B4513;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
     margin-bottom: 10px; /* Adds space between button & phone number */
 }
 
