@@ -489,7 +489,7 @@ footer {
         display: none; /* Hide menu initially */
         flex-direction: column;
         background-color: #8B4513;
-        position: absolute;
+        position: static;
         width: 100%;
         left: 0;
         top: 60px;
