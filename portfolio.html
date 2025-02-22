@@ -47,6 +47,8 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 10px;
+            transition: opacity 0.5s ease-in-out;
+    opacity: 0;
         }
 
         .lightbox .close {
@@ -60,7 +62,42 @@
             border-radius: 50%;
             padding: 10px;
         }
+        .lightbox img.show {
+    opacity: 1;
+}
+        /* Lightbox Navigation Buttons */
+.lightbox-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    font-size: 2rem;
+    border-radius: 50%;
+}
 
+.lightbox-button.prev {
+    left: 20px;
+}
+
+.lightbox-button.next {
+    right: 20px;
+}
+
+.lightbox-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lightbox-button {
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+}
         /* Filter Buttons */
         .filter-buttons {
             text-align: center;
@@ -176,6 +213,8 @@ function toggleMenu() {
     <div class="lightbox" id="lightbox">
         <span class="close" onclick="closeLightbox()">&times;</span>
         <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-button prev" onclick="prevImage()">&#10094;</button>
+    <button class="lightbox-button next" onclick="nextImage()">&#10095;</button>
     </div>
 
     <footer>
@@ -294,6 +333,64 @@ document.addEventListener("DOMContentLoaded", () => {
 document.querySelector('.sidebar-tab').addEventListener('click', function() {
     document.querySelector('.sidebar').classList.toggle('open');
 });
+        // Track current image index in the lightbox
+let lightboxCurrentIndex = 0;
+
+// Open Lightbox with Navigation
+function openLightbox(img) {
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.classList.remove('show'); // Reset opacity
+    setTimeout(() => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxImg.classList.add('show');
+    }, 50);
+    lightboxCurrentIndex = Array.from(document.querySelectorAll('.gallery img')).indexOf(img);
+    document.getElementById('lightbox').style.display = 'flex';
+
+    // Enable keyboard navigation
+    document.addEventListener('keydown', handleKeyNavigation);
+}
+
+// Close Lightbox
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.removeEventListener('keydown', handleKeyNavigation);
+}
+
+// Show Next Image
+function nextImage() {
+    lightboxCurrentIndex = (lightboxCurrentIndex + 1) % images.length;
+    updateLightboxImage();
+}
+
+// Show Previous Image
+function prevImage() {
+    lightboxCurrentIndex = (lightboxCurrentIndex - 1 + images.length) % images.length;
+    updateLightboxImage();
+}
+
+// Update Lightbox Image with Transition
+function updateLightboxImage() {
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.classList.remove('show');
+    setTimeout(() => {
+        lightboxImg.src = images[lightboxCurrentIndex].src;
+        lightboxImg.alt = images[lightboxCurrentIndex].alt;
+        lightboxImg.classList.add('show');
+    }, 50);
+}
+
+// Handle Keyboard Navigation
+function handleKeyNavigation(event) {
+    if (event.key === 'ArrowRight') {
+        nextImage();
+    } else if (event.key === 'ArrowLeft') {
+        prevImage();
+    } else if (event.key === 'Escape') {
+        closeLightbox();
+    }
+}
     </script>
 </body>
 </html>
