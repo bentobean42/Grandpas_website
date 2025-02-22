@@ -566,4 +566,19 @@ img, video {
         width: 80%; /* Reduce sidebar width */
     }
 }
+@media only screen and (max-width: 768px) {
+  .scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
 
+  .scroll-button.left {
+    left: 10px;
+  }
+
+  .scroll-button.right {
+    right: 10px;
+  }
+}
