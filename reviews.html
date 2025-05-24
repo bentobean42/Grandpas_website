@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Customer Review Page</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-92JSW42Y5H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-92JSW42Y5H');
+</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4F8Y8B97M6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4F8Y8B97M6');
+</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+        // Custom Tailwind configuration to extend theme with your brand colors
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-primary': '#bf8040', // Header/Footer background
+                        'brand-secondary': '#8B4513', // Button background, main headings
+                        'brand-hover': '#654321', // Button hover
+                        'brand-accent': '#FFD700', // Active link, gold
+                        'text-general': '#555', // General body text
+                        'text-dark': '#333', // Dark text like sidebar background
+                    },
+                    fontFamily: {
+                        'sans': ['Arial', 'sans-serif'], // Set Arial as the primary sans-serif font
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans">
+    <div class="min-h-screen flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl w-full p-8 space-y-10 main-content-box">
+            <div class="flex justify-center mb-6">
+                <a href="index.html" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-primary hover:bg-brand-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent transition ease-in-out duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m2 12 3-3m2-2V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m-2 3H9m6 8-3-3-3 3M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Z" />
+                    </svg>
+                    Home
+                </a>
+            </div>
+            <div id="currentUserId" class="text-sm text-gray-600 text-right mb-4">Your User ID: Loading...</div>
+
+            <section class="text-center">
+                <h1 class="text-4xl font-extra bold text-brand-secondary mb-4">Customer Reviews</h1>
+                <p class="text-lg text-text-general mb-8">Hear what our amazing customers have to say about us!</p>
+
+                <div id="reviewsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    </div>
+
+                <div id="noReviewsMessage" class="hidden text-center text-gray-500 text-lg mt-8 p-4 bg-gray-100 rounded-md">
+                    No reviews yet. Be the first to share your experience!
+                </div>
+            </section>
+
+            <hr class="border-t border-gray-200 my-10">
+
+            <section>
+                <h2 class="text-3xl font-bold text-brand-secondary text-center mb-6">Write a Review</h2>
+                <form id="reviewForm" class="space-y-6 p-6 bg-white/90 rounded-lg shadow-md">
+                    <div>
+                        <label class="block text-sm font-medium text-text-general mb-2">Your Rating</label>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars">&#9733;</label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars">&#9733;</label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars">&#9733;</label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars">&#9733;</label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star">&#9733;</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="review-title" class="block text-sm font-medium text-text-general mb-1">Review Title</label>
+                        <input type="text" id="review-title" name="review-title" placeholder="e.g., 'Excellent product!'"
+                                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-accent focus:border-brand-accent sm:text-sm" required>
+                    </div>
+
+                    <div>
+                        <label for="review-text" class="block text-sm font-medium text-text-general mb-1">Your Review</label>
+                        <textarea id="review-text" name="review-text" rows="5" placeholder="Share your experience with us..."
+                                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-accent focus:border-brand-accent sm:text-sm" required></textarea>
+                    </div>
+
+                    <div>
+                        <label for="review-photo" class="block text-sm font-medium text-text-general mb-1">Upload Photo (Optional)</label>
+                        <input type="file" id="review-photo" name="review-photo" accept="image/*"
+                                        class="mt-1 block w-full text-sm text-text-general
+                                             file:mr-4 file:py-2 file:px-4
+                                             file:rounded-md file:border-0
+                                             file:text-sm file:font-semibold
+                                             file:file:bg-brand-primary file:text-white
+                                             hover:file:bg-brand-hover"/>
+                        <p class="mt-1 text-xs text-text-general">Max file size: 5MB. Accepted formats: JPG, PNG, GIF.</p>
+                    </div>
+
+                    <div>
+                        <label for="reviewer-name" class="block text-sm font-medium text-text-general mb-1">Your Name</label>
+                        <input type="text" id="reviewer-name" name="reviewer-name" placeholder="e.g., Jane Doe"
+                                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-accent focus:border-brand-accent sm:text-sm" required>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <button type="submit" id="submitButton"
+                                             class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-secondary hover:bg-brand-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent transition ease-in-out duration-150">
+                            Submit Review
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </div>
+
+    <div id="messageBox" class="fixed top-4 right-4 p-4 rounded-md shadow-lg text-white z-50 transition-transform transform translate-x-full">
+        <span id="messageText"></span>
+    </div>
+</body>
+
+</html>

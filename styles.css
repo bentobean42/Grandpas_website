@@ -1,20 +1,45 @@
 /* General Styles */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevents horizontal scrollbar */
+    position: relative; /* Needed for background-attachment: fixed on body */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex; /* Enables flexbox for the main layout */
+    flex-direction: column; /* Stacks content vertically (header, main, footer) */
+    min-height: 100vh; /* Ensures the body takes at least the full viewport height, pushing footer to bottom */
+    background-image: url('images/background-image.jpg'); /* Your background image */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Makes the background image fixed when scrolling */
+}
 
 /* Sidebar Tab Styles */
+/* This tab will always be visible and trigger the sidebar */
 .sidebar-tab {
-    position: fixed;
+    position: fixed; /* Stays in place when scrolling */
     top: 10px;
     left: 10px;
     background-color: #333;
     color: #fff;
     width: 30px;
     height: 30px;
-    cursor: pointer;
+    cursor: pointer; /* Changes cursor to pointer on hover */
     text-align: center;
-    line-height: 30px;
-    transition: background-color 0.3s;
-    z-index: 10;
-    border-radius: 5px;
+    line-height: 30px; /* Vertically centers the "☰" icon */
+    transition: background-color 0.3s; /* Smooth transition for background color change */
+    z-index: 1002; /* Ensures it's on top of everything else */
+    border-radius: 5px; /* Slightly rounded corners */
 }
 
 .sidebar-tab a {
@@ -28,28 +53,29 @@
 }
 
 /* Sidebar Styles */
+/* The actual sidebar content that slides in */
 .sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
+    height: 100%; /* Takes full height of the viewport */
+    width: 0; /* Initially hidden (width is 0) */
+    position: fixed; /* Stays in place */
     top: 0;
     left: 0;
     background-color: #333;
-    overflow-x: hidden;
-    transition: width 0.3s;
-    padding-top: 60px;
-    visibility: hidden;
-    z-index: 9;
+    overflow-x: hidden; /* Hides content that overflows horizontally */
+    transition: width 0.3s; /* Smooth transition when opening/closing */
+    padding-top: 60px; /* Space from the top for content */
+    visibility: hidden; /* Hides the content until opened */
+    z-index: 1001; /* Appears above the header */
 }
 
 .sidebar.open {
-    width: 250px;
-    visibility: visible;
+    width: 250px; /* Width when the sidebar is open */
+    visibility: visible; /* Makes content visible when open */
 }
 
 .sidebar-content ul {
-    list-style-type: none;
-    padding: 0;
+    list-style-type: none; /* Removes bullet points */
+    padding: 0; /* Removes default padding */
 }
 
 .sidebar-content a {
@@ -57,7 +83,7 @@
     text-decoration: none;
     font-size: 20px;
     color: white;
-    display: block;
+    display: block; /* Makes the entire link area clickable */
 }
 
 .sidebar-content a:hover {
@@ -67,81 +93,112 @@
 
 .sidebar-content .active {
     font-weight: bold;
-    color: #FFD700;
+    color: #FFD700; /* Gold color for active link */
 }
 
-/* Body and Background Image */
-* {
-    box-sizing: border-box;
-}
-
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    position: relative;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-image: url('images/background-image.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    position: relative;
-}
+/* Header Styles */
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #bf8040;
-    padding: 15px 20px;
-    z-index: 1000;
-    box-sizing: border-box;
-}
-/* Header and Footer */
-header, footer {
-    background-color: #bf8040;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-    z-index: 1;
-    position: relative;
-    box-sizing: border-box;
+    background-color: #bf8040; /* Header background color */
+    padding: 15px 20px; /* Padding inside the header */
+    color: white; /* Default text color for header content */
+    z-index: 1000; /* Stacking order, below sidebar */
+    box-sizing: border-box; /* Includes padding in element's total width */
+    width: 100%; /* Full width header */
 }
 
-header h1, footer p {
-    margin: 0;
+/* Header Inner Container - Uses Flexbox for layout */
+.header-inner {
+    display: flex; /* Makes the h1, nav, and contact-info arrange in a row */
+    align-items: center; /* Vertically centers items within the header-inner */
+    justify-content: space-between; /* Distributes space between items (h1, nav, contact-info) */
+    flex-wrap: wrap; /* Allows items to wrap to the next line if space is limited */
+    max-width: 1200px; /* Maximum width for the header content */
+    margin: 0 auto; /* Centers the header content on large screens */
+    padding: 0 16px; /* Horizontal padding inside the header content area */
+    position: relative; /* Needed for any absolutely positioned children (though we removed it from contact-info) */
+    width: 100%; /* Ensures it takes full width within its parent */
 }
 
-header nav ul, footer nav ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+/* Website Title (h1) */
+header h1 {
+    margin: 0; /* Removes default margins */
+    text-align: left; /* Aligns the title text to the left */
+    flex-grow: 1; /* Allows the title to take up available space, pushing other elements */
+    font-size: 2.2em; /* Size of the title */
+    order: 1; /* Sets the order for flex items (first) */
 }
 
-header nav ul li, footer nav ul li {
-    margin: 0 10px;
+/* Header Navigation */
+header nav {
+    flex-grow: 1; /* Allows navigation to take up available space to help centering */
+    text-align: center; /* Centers the navigation list within the nav container */
+    order: 2; /* Sets the order for flex items (second) */
 }
 
-header nav ul li a, footer nav ul li a {
+header nav ul {
+    list-style-type: none; /* Removes bullet points */
+    padding: 0; /* Removes default padding */
+    display: flex; /* Makes list items arrange horizontally */
+    justify-content: center; /* Centers the navigation items within the ul */
+    margin: 0; /* Removes default margins */
+}
+
+header nav ul li {
+    margin: 0 15px; /* Horizontal spacing between navigation links */
+}
+
+header nav ul li a {
     text-decoration: none;
     color: white;
+    white-space: nowrap; /* Prevents navigation links from wrapping text */
+    padding: 5px 0; /* Adds vertical padding for larger click area */
+    display: block; /* Makes padding effective */
 }
 
 header nav ul li a.active {
     font-weight: bold;
     color: #FFD700;
+}
+
+/* Contact Button and Phone Number */
+.contact-info {
+    display: flex; /* Makes its children (button, phone number) flex items */
+    flex-direction: column; /* Stacks the button and phone number vertically */
+    align-items: center; /* Centers them horizontally within the contact-info div */
+    order: 3; /* Sets the order for flex items (third) */
+    margin-left: 20px; /* Space from navigation on desktop */
+    margin-right: 10px; /* Space from right edge */
+}
+
+.contact-button {
+    display: block;
+    background-color: #8B4513;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 5px; /* Space between button and phone number */
+}
+
+.contact-button:hover {
+    background-color: #654321;
+}
+
+.phone-number {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.phone-number a {
+    text-decoration: none;
+    color: white; /* Changed to white for better visibility on header background */
+    font-weight: bold;
+}
+
+.phone-number a:hover {
+    color: #FFD700; /* Gold color on hover */
 }
 
 /* Main Content */
@@ -151,11 +208,11 @@ main {
     border-radius: 10px;
     width: 90%;
     max-width: 800px;
-    margin: 40px auto;
-    flex: 1;
+    margin: 40px auto; /* Centers main content and adds vertical space */
+    flex: 1; /* Allows main content to grow and push footer down */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    margin-top: 80px; /* Pushes main content down to avoid overlap */
+    /* margin-top will be handled by the 40px auto above, adjust if needed */
     box-sizing: border-box;
 }
 
@@ -234,7 +291,7 @@ main {
 }
 
 .faq-item .answer.open {
-    max-height: 200px;
+    max-height: 200px; /* Consider a larger value like 1000px if content can be very long */
     padding: 10px;
 }
 
@@ -340,35 +397,7 @@ main {
     background-color: #6e3610;
 }
 
-/* Footer */
-footer {
-    position: relative;
-    bottom: 0;
-    padding: 20px;
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-    header nav ul, footer nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .content-box {
-        width: 90%;
-    }
-
-    .about-page main,
-    .faq-page main,
-    .services-page main,
-    .contact-page main {
-        width: 90%;
-    }
-
-    .services-page .services-grid {
-        grid-template-columns: 1fr;
-    }
-}
+/* Video Gallery Styles */
 .video-gallery {
     display: flex;
     flex-wrap: wrap;
@@ -388,13 +417,14 @@ footer {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
+
 /* Carousel Styles */
 .carousel {
     position: relative;
     width: 80%;
     max-width: 700px;
     margin: 20px auto;
-    overflow: hidden; /* Hide overflowing images */
+    overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -406,7 +436,7 @@ footer {
 
 .carousel-images img {
     width: 100%;
-    flex-shrink: 0; /* Prevent shrinking */
+    flex-shrink: 0;
     border-radius: 10px;
 }
 
@@ -436,134 +466,143 @@ footer {
 .right-arrow {
     right: 10px;
 }
-.contact-info {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.contact-button {
-    display: block;
-    background-color: #8B4513;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-bottom: 10px; /* Adds space between button & phone number */
-}
-
-.contact-button:hover {
-    background-color: #654321;
-}
-
-/* Style the phone number */
-.phone-number {
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.phone-number a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-.phone-number a:hover {
-    color: #8B4513; /* Brown color on hover */
-}
-@media screen and (max-width: 768px) {
-    .video-container video {
-        max-width: 100%; /* Full width on small screens */
-    }
-}
+/* Video Container Specifics */
 .video-container video {
     width: 100%;
-    max-width: 600px; /* Reduce the max width */
-    height: auto; /* Keeps aspect ratio */
+    max-width: 600px;
+    height: auto;
     display: block;
-    margin: 0 auto; /* Centers the video */
+    margin: 0 auto;
 }
+
 .video-container iframe {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9; /* Ensures proper aspect ratio */
-}
-.video-container {
-    position: relative;
-    width: 100%;
-    max-width: 600px; /* Adjust width as needed */
-    margin: 0 auto; /* Centers the video */
+    aspect-ratio: 16 / 9; /* Ensures proper aspect ratio for YouTube embeds */
 }
 
 .hidden-video {
-    display: none;
+    display: none; /* Used to hide videos initially */
 }
-/* ✅ MOBILE MENU FIX */
+
+/* Footer Styles */
+footer {
+    background-color: #bf8040;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    box-sizing: border-box;
+    margin-top: auto; /* Pushes the footer to the bottom of the page */
+}
+
+footer nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows footer nav items to wrap on small screens */
+}
+
+footer nav ul li {
+    margin: 0 10px;
+}
+
+footer nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+footer nav ul li a.active {
+    font-weight: bold;
+    color: #FFD700;
+}
+
+/* --- Responsiveness --- */
 @media (max-width: 768px) {
+    /* Header layout for smaller screens */
+    .header-inner {
+        flex-direction: column; /* Stacks h1, nav, and contact-info vertically */
+        align-items: center; /* Centers items horizontally when stacked */
+        padding: 10px; /* Adjust padding for mobile */
+    }
+
+    header h1 {
+        text-align: center; /* Centers the title on mobile for better stacking aesthetics */
+        font-size: 1.6em; /* Smaller title on mobile */
+        width: 100%; /* Take full width when stacked */
+        margin-bottom: 15px; /* Space below title */
+    }
+
+    header nav {
+        width: 100%; /* Take full width when stacked */
+        margin-bottom: 15px; /* Space below nav */
+    }
+
+    header nav ul {
+        flex-direction: row; /* Keep nav items horizontal */
+        flex-wrap: wrap; /* IMPORTANT: Allows nav items to wrap to next line if they don't fit */
+        justify-content: center; /* Centers wrapped items */
+        margin-left: -5px; /* Adjust for margin compensation */
+        margin-right: -5px; /* Adjust for margin compensation */
+    }
+
+    header nav ul li {
+        margin: 5px 5px; /* Reduced margin for tighter fit on mobile */
+    }
+
+    .contact-info {
+        flex-direction: column; /* Stack button and phone number vertically on mobile */
+        margin: 0; /* Remove side margins */
+        width: 100%; /* Take full width */
+    }
+
+    /* Adjust main content width for mobile */
     main {
-        width: 95%;
+        width: 95%; /* Wider main content on mobile */
         padding: 15px;
-        margin-top: 70px;
     }
 
-    header, footer {
-        padding: 15px 10px;
-        width: 100vw;
-        max-width: 100%;
+    /* Other page specific responsiveness (existing rules) */
+    .about-page main,
+    .faq-page main,
+    .services-page main,
+    .contact-page main {
+        width: 95%;
     }
 
-    header nav ul li, footer nav ul li {
-        margin: 5px;
+    .services-page .services-grid {
+        grid-template-columns: 1fr; /* Services grid stacks on mobile */
     }
 
-    .footer-social {
-        margin-bottom: 10px;
-    }
-
-    .footer-info {
-        padding: 0 10px;
-    }
-
-    nav ul {
-        display: none; /* Hide menu initially */
-        flex-direction: column;
-        background-color: #8B4513;
-        position: static;
+    button, .filter-buttons button {
+        padding: 12px 15px;
+        font-size: 16px;
         width: 100%;
-        left: 0;
-        top: 60px;
-        text-align: center;
-        z-index: 1000;
+        margin: 5px 0;
     }
 
-    nav ul.show {
-        display: flex; /* Show when menu is toggled */
+    /* For carousel arrows on mobile, if they were causing issues */
+    .lightbox-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
     }
 
-    nav ul li {
-        display: block;
-        width: 100%;
-        padding: 10px;
+    .lightbox-button.left {
+        left: 10px;
     }
 
-    .menu-icon {
-        display: block;
-        cursor: pointer;
-        font-size: 30px;
-        color: white;
-        padding: 10px;
-        text-align: right;
-        margin-right: 20px;
+    .lightbox-button.right {
+        right: 10px;
     }
 }
 
-/* ✅ MAKE IMAGES & VIDEOS RESPONSIVE */
+/* ✅ MAKE IMAGES & VIDEOS RESPONSIVE (General rule) */
 img, video {
     max-width: 100%;
     height: auto;
@@ -571,55 +610,176 @@ img, video {
     margin: auto;
 }
 
-/* ✅ FIX GALLERY GRID ON MOBILE */
+/* ✅ FIX GALLERY GRID ON MOBILE (if you have a .gallery class) */
 @media (max-width: 768px) {
     .gallery {
         grid-template-columns: 1fr; /* Make images stack in a single column */
     }
 }
+ .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 10px;
+            margin-top: 20px;
+        }
 
-/* ✅ MAKE BUTTONS BIGGER ON MOBILE */
-@media (max-width: 768px) {
-    button, .filter-buttons button {
-        padding: 15px 20px;
-        font-size: 18px;
-        width: 100%; /* Make buttons full width */
-        margin: 5px 0;
-    }
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Lightbox Styling */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .lightbox img.show {
+    opacity: 1;
 }
-
-/* ✅ ADJUST MAIN CONTENT WIDTH */
-@media (max-width: 768px) {
-    main {
-        width: 90%;
-        padding: 10px;
-    }
-
-    h1, h2 {
-        font-size: 24px;
-        text-align: center;
-    }
-}
-
-/* ✅ MAKE SIDEBAR SMALLER ON MOBILE */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 80%; /* Reduce sidebar width */
-    }
-}
-@media only screen and (max-width: 768px) {
-  .lightbox-button {
+        /* Lightbox Navigation Buttons */
+.lightbox-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 10;
-  }
-
-  .lightbox-button.left {
-    left: 10px;
-  }
-
-  .lightbox-button.right {
-    right: 10px;
-  }
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    font-size: 2rem;
+    border-radius: 50%;
 }
+
+.lightbox-button.prev {
+    left: 20px;
+}
+
+.lightbox-button.next {
+    right: 20px;
+}
+
+.lightbox-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lightbox-button {
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+        left: 10px;
+        right: 10px;
+    }
+}
+        /* Filter Buttons */
+        .filter-buttons {
+            margin-bottom: 20px;
+        }
+
+        .filter-buttons button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #8B4513;
+            color: white;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .filter-buttons button:hover {
+            background-color: #654321;
+        }
+
+        /* Pagination */
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #8B4513;
+            color: white;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .pagination button:hover {
+            background-color: #654321;
+        }
+/* Custom styles for star ratings and general aesthetics */
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+        .star-rating label {
+            font-size: 2.5rem; /* Large stars */
+            color: #d1d5db; /* Gray stars by default */
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input[type="radio"]:checked ~ label {
+            color: #fbbf24; /* Yellow for selected/hovered stars */
+        }
+        /* Reverse order for star selection logic */
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+        }
+        .star-rating label:nth-child(1) { order: 5; }
+        .star-rating label:nth-child(2) { order: 4; }
+        .star-rating label:nth-child(3) { order: 3; }
+        .star-rating label:nth-child(4) { order: 2; }
+        .star-rating label:nth-child(5) { order: 1; }
+
+        /* Custom styles to match your provided CSS for main content box */
+        .main-content-box {
+            background-color: rgba(255, 255, 255, 0.9); /* Matches your main content background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Matches your main content shadow */
+            border-radius: 10px; /* Matches your main content border-radius */
+        }
