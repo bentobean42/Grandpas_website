@@ -68,7 +68,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDfHHOOTEy-p5HA4P5OOohqNZJAnj3cfr4",
   authDomain: "reviews-6057c.firebaseapp.com",
   projectId: "reviews-6057c",
-  storageBucket: "reviews-6057c.appspot.com", // <-- Fixed: appspot.com, not firebasestorage.app
+  storageBucket: "reviews-6057c.firebasestorage.app", // <-- Fixed: appspot.com, not firebasestorage.app
   messagingSenderId: "73309790767",
   appId: "1:73309790767:web:eebb406e7ee6631c231cda",
   measurementId: "G-4F8Y8B97M6"
