@@ -195,7 +195,6 @@ async function submitReview(event) {
     const title = form['review-title'].value.trim();
     const text = form['review-text'].value.trim();
     const reviewerName = form['reviewer-name'].value.trim();
-    const photoFile = form['review-photo'].files[0];
 
     if (!rating || !title || !text || !reviewerName) {
         showMessageBox("Please fill in all required fields (Rating, Title, Review, Name).", "error");
@@ -206,24 +205,6 @@ async function submitReview(event) {
     if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = 'Submitting...';
-    }
-
-    let photoURL = '';
-    if (photoFile) {
-        try {
-            const storageRef = ref(storage, `review_photos/${auth.currentUser.uid}/${photoFile.name}_${Date.now()}`);
-            const uploadTask = await uploadBytes(storageRef, photoFile);
-            photoURL = await getDownloadURL(uploadTask.ref);
-            showMessageBox("Photo uploaded successfully!", "success");
-        } catch (error) {
-            console.error("Error uploading photo:", error);
-            showMessageBox("Error uploading photo. Please try again.", "error");
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Submit Review';
-            }
-            return;
-        }
     }
 
     try {
