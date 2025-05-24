@@ -147,7 +147,6 @@ function displayReviews(reviews) {
             <p class="text-text-general leading-relaxed mb-4">
                 ${review.text}
             </p>
-            ${review.photoURL ? `<img src="${review.photoURL}" alt="Customer uploaded photo" class="w-full h-auto rounded-md mb-4 object-cover" onerror="this.style.display='none';">` : ''}
             <div class="text-sm text-text-general">
                 — ${review.reviewerName}, ${review.timestamp && review.timestamp.toDate ? new Date(review.timestamp.toDate()).toLocaleDateString() : ""}
             </div>
@@ -214,7 +213,6 @@ async function submitReview(event) {
             title,
             text,
             reviewerName,
-            photoURL,
             timestamp: serverTimestamp(),
             userId: auth.currentUser.uid,
             isVerifiedPurchase: true
