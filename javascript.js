@@ -270,3 +270,51 @@ window.addEventListener('DOMContentLoaded', async () => {
         showMessageBox("Failed to load the review page. Please try again later.", "error");
     }
 });
+  
+document.addEventListener("DOMContentLoaded", function () {
+    let video1 = document.getElementById("video1");
+    let video2 = document.getElementById("video2");
+    let player1, player2;
+
+    // Load YouTube API
+    function onYouTubeIframeAPIReady() {
+        player1 = new YT.Player('video1', {
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
+        });
+
+        player2 = new YT.Player('video2', {
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // Handle video state change
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+            if (event.target === player1) {
+                video1.style.display = "none";
+                video2.style.display = "block";
+                player2.playVideo();
+            } else if (event.target === player2) {
+                video2.style.display = "none";
+                video1.style.display = "block";
+                player1.playVideo();
+            }
+        }
+    }
+
+    // Load the YouTube IFrame Player API
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Make the API function available globally
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+});
+        document.querySelector('.sidebar-tab').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
