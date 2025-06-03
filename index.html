@@ -15,6 +15,27 @@
 
   gtag('config', 'G-92JSW42Y5H');
 </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+        // Custom Tailwind configuration to extend theme with your brand colors
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-primary': '#bf8040', // Header/Footer background
+                        'brand-secondary': '#8B4513', // Button background, main headings
+                        'brand-hover': '#654321', // Button hover
+                        'brand-accent': '#FFD700', // Active link, gold
+                        'text-general': '#555', // General body text
+                        'text-dark': '#333', // Dark text like sidebar background
+                    },
+                    fontFamily: {
+                        'sans': ['Arial', 'sans-serif'], // Set Arial as the primary sans-serif font
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
 
