@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Gallery - Arts Fine Finishes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar (unchanged) -->
+    <div class="sidebar-tab"><a href="#">☰</a></div>
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+            </ul>
+        </div>
+    </div>
+    <header>
+        <div class="header-inner">
+            <h1 id="project-title">Project</h1>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                </ul>
+            </nav>
+            <div class="contact-info">
+                <a href="contact.html" class="contact-button">Contact</a>
+                <p class="phone-number"><a href="tel:+2096886706">📞 (209) 688-3706</a></p>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="content-box">
+            <h2 id="project-title-secondary"></h2>
+            <p id="project-description"></p>
+            <div class="gallery" id="project-gallery"></div>
+            <div>
+                <a href="portfolio.html" class="back-link">&laquo; Back to Portfolio</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/arts_fine_finishes" target="_blank">
+                <i class="fa-brands fa-instagram fa-2x"></i>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+            </ul>
+        </nav>
+        <div class="footer-info">
+            <p>2024 Arts Fine Finishes</p>
+            <p>Crafting Excellence in Every Detail</p>
+        </div>
+    </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // --- Project data: specify imageCount and path pattern for each project ---
+    const projects = [
+        {
+            id: "custom-stain-projects",
+            title: "Custom Stain Projects",
+            cover: "images/batch1/custom-stain-projects/Custom-stain20.jpeg",
+            description: "Unique wood stain finishes tailored to your needs.",
+            images: [
+                ...Array.from({length: 53}, (_, i) => `images/batch1/custom-stain-projects/Custom-stain${i+1}.jpeg`),
+                ...Array.from({length: 60}, (_, i) => `images/batch2/custom-stain-projects/Custom-stain${i+1}.jpeg`)
+            ]
+        },
+        {
+            id: "kitchen-cabinets",
+            title: "Kitchen Cabinets",
+            cover: "images/kitchen-cabinets/Kitchen18.jpeg",
+            description: "Transforming kitchens with expert cabinet staining.",
+            imageCount: 26,
+            imagePattern: "images/kitchen-cabinets/Kitchen{n}.jpeg"
+        },
+        {
+            id: "furniture-restoration",
+            title: "Furniture Restoration",
+            cover: "images/furniture-restoration/Furniture3.jpeg",
+            description: "Bringing old furniture back to life with fine finishes.",
+            imageCount: 21,
+            imagePattern: "images/furniture-restoration/Furniture{n}.jpeg"
+        },
+        {
+            id: "custom-projects",
+            title: "Custom Projects",
+            cover: "images/custom-projects/custom4.jpeg",
+            description: "Special woodwork and custom finishing solutions.",
+            imageCount: 59,
+            imagePattern: "images/custom-projects/Custom{n}.jpeg"
+        },
+        {
+            id: "before-and-after",
+            title: "Before and After",
+            cover: "images/before-and-after/cover.jpeg",
+            description: "See dramatic transformations with our before and after gallery.",
+            imageCount: 11,
+            imagePattern: "images/before-and-after/before{n}.jpeg"
+        }
+    ];
+
+    // Read project ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('id');
+    const project = projects.find(p => p.id === projectId);
+
+    // Sidebar toggle
+    document.querySelector('.sidebar-tab').addEventListener('click', function() {
+        document.querySelector('.sidebar').classList.toggle('open');
+    });
+
+    // Render project if found
+    if (project) {
+        document.title = project.title + " - Arts Fine Finishes";
+        document.getElementById('project-title').textContent = project.title;
+        document.getElementById('project-title-secondary').textContent = project.title;
+        document.getElementById('project-description').textContent = project.description;
+
+        // Generate image URLs
+        let images = [];
+        if (project.images && Array.isArray(project.images)) {
+            images = project.images;
+        } else if ('imageCount' in project && 'imagePattern' in project) {
+            for (let i = 1; i <= project.imageCount; i++) {
+                images.push(project.imagePattern.replace('{n}', i));
+            }
+        }
+
+        // Render gallery
+        const gallery = document.getElementById('project-gallery');
+        images.forEach((src, idx) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = project.title + " Image " + (idx + 1);
+            img.className = "gallery-img";
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function() {
+                openLightbox(idx);
+            });
+            gallery.appendChild(img);
+        });
+
+        // Lightbox logic
+        let currentImageIndex = 0;
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            updateLightbox();
+            lightboxModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            lightboxModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        function updateLightbox() {
+            lightboxImg.src = images[currentImageIndex];
+            lightboxImg.alt = project.title + " Image " + (currentImageIndex + 1);
+        }
+        function showPrev() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateLightbox();
+        }
+        function showNext() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateLightbox();
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxPrev.addEventListener('click', showPrev);
+        lightboxNext.addEventListener('click', showNext);
+
+        document.addEventListener('keydown', function(e) {
+            if (lightboxModal.style.display === 'flex') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
+            }
+        });
+        lightboxModal.addEventListener('click', function(e) {
+            if (e.target === lightboxModal) closeLightbox();
+        });
+
+        // Zoom-in toggle
+        let isZoomed = false;
+        lightboxImg.addEventListener('click', function(e) {
+            if (!isZoomed) {
+                this.style.transform = 'scale(2)';
+                this.style.cursor = 'zoom-out';
+            } else {
+                this.style.transform = '';
+                this.style.cursor = 'zoom-in';
+            }
+            isZoomed = !isZoomed;
+            e.stopPropagation();
+        });
+
+    } else {
+        document.getElementById('project-title').textContent = "Project Not Found";
+        document.getElementById('project-title-secondary').textContent = "";
+        document.getElementById('project-description').textContent = "Sorry, the project you are looking for does not exist.";
+        document.getElementById('project-gallery').innerHTML = "";
+    }
+});
+</script>
+<!-- Lightbox Modal -->
+<div class="lightbox-modal" id="lightbox-modal" style="display:none;">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <span class="lightbox-arrow left" id="lightbox-prev">&#10094;</span>
+    <span class="lightbox-arrow right" id="lightbox-next">&#10095;</span>
+</div>
+</body>
+</html>

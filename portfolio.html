@@ -64,211 +64,73 @@ function toggleMenu() {
         </div>
         </div>
     </header>
-
-    <main>
-        <section class="content-box">
+   <main>
+ <section class="content-box">
             <h2>Our Work</h2>
-            <p>Take a look at some of our wood staining projects:</p>
-
-            <!-- Filter Buttons -->
-            <div class="filter-buttons">
-                <button onclick="filterImages('all')">All</button>
-                <button onclick="filterImages('custom-projects')">Custom Projects</button>
-                <button onclick="filterImages('custom-stain-projects')">Custom Stain Projects</button>
-                <button onclick="filterImages('furniture-restoration')">Furniture Restoration</button>
-                <button onclick="filterImages('kitchen-cabinets')">Kitchen Cabinets</button>
-            </div>
-
-            <!-- Gallery -->
-            <div class="gallery" id="image-gallery"></div>
-
-            <!-- Pagination -->
-            <div class="pagination">
-                <button onclick="loadMoreImages()">Load More</button>
-            </div>
+            <p>Click on any project to see all its photos and details.</p>
+            <!-- Portfolio project grid -->
+            <div class="portfolio-grid" id="portfolio-grid"></div>
         </section>
-    </main>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <span class="close" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" src="" alt="">
-        <button class="lightbox-button prev" onclick="prevImage()">&#10094;</button>
-    <button class="lightbox-button next" onclick="nextImage()">&#10095;</button>
-    </div>
-
-    <!-- JavaScript -->
-    <script>
-    const images = [];
-const imagesPerPage = 12;
-let currentImageIndex = 0;
-const batches = ["batch1", "batch2"];
-
-// Custom Stain Projects (inside batch1 & batch2)
-for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
-    for (let i = 1; i <= 60; i++) {
-        images.push({ src: `images/${batches[batchIndex]}/custom-stain-projects/Custom-stain${i}.jpeg`, category: "custom-stain-projects" });
-    }
-}
-
-// Custom Projects (59 images)
-for (let i = 1; i <= 59; i++) {
-    images.push({ src: `images/custom-projects/Custom${i}.jpeg`, category: "custom-projects" });
-}
-
-// Furniture Restoration (21 images)
-for (let i = 1; i <= 21; i++) {
-    images.push({ src: `images/furniture-restoration/Furniture${i}.jpeg`, category: "furniture-restoration" });
-}
-
-// Kitchen Cabinets (26 images)
-for (let i = 1; i <= 26; i++) {
-    images.push({ src: `images/kitchen-cabinets/Kitchen${i}.jpeg`, category: "kitchen-cabinets" });
-}
-
-// Function to load images dynamically
-function loadImages(startIndex, count) {
-    const gallery = document.getElementById('image-gallery');
-    for (let i = startIndex; i < startIndex + count && i < images.length; i++) {
-        const imgElement = document.createElement('img');
-        imgElement.src = images[i].src;
-        imgElement.classList.add('filter-item', images[i].category);
-        imgElement.alt = "Project Image";
-        imgElement.loading = "lazy";
-        imgElement.onclick = () => openLightbox(imgElement);
-        gallery.appendChild(imgElement);
-    }
-    applyFilter(currentFilter); // ✅ Apply filter after images are loaded
-}
-
-// Function to load more images when scrolling
-function loadMoreImages() {
-    loadImages(currentImageIndex, imagesPerPage);
-    currentImageIndex += imagesPerPage;
-
-    if (currentImageIndex >= images.length) {
-        window.removeEventListener("scroll", onScrollLoadMore);
-    }
-}
-
-// Function to check if the user has scrolled to the bottom
-function onScrollLoadMore() {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-        loadMoreImages();
-    }
-}
-
-// ✅ Track the current filter selection
-let currentFilter = "all";
-
-// Function to filter images based on category
-function filterImages(category) {
-    currentFilter = category; // ✅ Store the selected filter
-    applyFilter(category);
-}
-
-function applyFilter(category) {
-    const allImages = document.querySelectorAll('.gallery img');
-    allImages.forEach(img => {
-        img.style.display = "none";
-        if (category === "all" || img.classList.contains(category)) {
-            img.style.display = "block";
+</main>
+<script>
+    // Example data -- update to match your actual projects!
+    const projects = [
+     {
+            id: "before-and-after",
+            title: "Before and After",
+            cover: "images/before-and-after/before6.jpeg",
+            description: "See dramatic transformations with our before and after gallery."
+        },
+        {
+            id: "custom-stain-projects",
+            title: "Custom Stain Projects",
+            cover: "images/batch2/custom-stain-projects/Custom-stain18.jpeg",
+            description: "Unique wood stain finishes tailored to your needs."
+        },
+        {
+            id: "kitchen-cabinets",
+            title: "Kitchen Cabinets",
+            cover: "images/kitchen-cabinets/Kitchen24.jpeg",
+            description: "Transforming kitchens with expert cabinet staining."
+        },
+        {
+            id: "furniture-restoration",
+            title: "Furniture Restoration",
+            cover: "images/furniture-restoration/Furniture6.jpeg",
+            description: "Bringing old furniture back to life with fine finishes."
+        },
+        {
+            id: "custom-projects",
+            title: "Custom Projects",
+            cover: "images/custom-projects/custom19.jpeg",
+            description: "Special woodwork and custom finishing solutions."
         }
+
+    ];
+
+    // Render the portfolio grid
+    const grid = document.getElementById('portfolio-grid');
+    projects.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'portfolio-card';
+        card.innerHTML = `
+            <img src="${project.cover}" alt="${project.title} Cover" class="portfolio-cover">
+            <div class="portfolio-card-body">
+                <h3 class="portfolio-title">${project.title}</h3>
+                <p class="portfolio-desc">${project.description}</p>
+            </div>
+        `;
+        card.onclick = () => {
+            window.location.href = `project.html?id=${project.id}`;
+        };
+        grid.appendChild(card);
     });
-}
 
-// Function to open Lightbox
-function openLightbox(img) {
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = img.src;
-    lightboxImg. alt = img. alt;
-    document.getElementById('lightbox').style.display = 'flex';
-}
-
-// Function to close Lightbox
-function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-}
-
-// Load initial images on page load
-document.addEventListener("DOMContentLoaded", () => {
-    loadImages(0, imagesPerPage);
-    currentImageIndex += imagesPerPage;
-    window.addEventListener("scroll", onScrollLoadMore);
-
-    // ✅ Ensure filters work from the start
-    document.querySelectorAll(".filter-buttons button").forEach(button => {
-        button.addEventListener("click", function () {
-            const category = this.getAttribute("onclick").match(/'([^']+)'/)[1];
-            filterImages(category);
-        });
+    // Sidebar toggle functionality
+    document.querySelector('.sidebar-tab').addEventListener('click', function() {
+        document.querySelector('.sidebar').classList.toggle('open');
     });
-});
-
-// Sidebar toggle
-document.querySelector('.sidebar-tab').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('open');
-});
-        // Track current image index in the lightbox
-let lightboxCurrentIndex = 0;
-
-// Open Lightbox with Navigation
-function openLightbox(img) {
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.classList.remove('show'); // Reset opacity
-    setTimeout(() => {
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightboxImg.classList.add('show');
-    }, 50);
-    lightboxCurrentIndex = Array.from(document.querySelectorAll('.gallery img')).indexOf(img);
-    document.getElementById('lightbox').style.display = 'flex';
-
-    // Enable keyboard navigation
-    document.addEventListener('keydown', handleKeyNavigation);
-}
-
-// Close Lightbox
-function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-    document.removeEventListener('keydown', handleKeyNavigation);
-}
-
-// Show Next Image
-function nextImage() {
-    lightboxCurrentIndex = (lightboxCurrentIndex + 1) % images.length;
-    updateLightboxImage();
-}
-
-// Show Previous Image
-function prevImage() {
-    lightboxCurrentIndex = (lightboxCurrentIndex - 1 + images.length) % images.length;
-    updateLightboxImage();
-}
-
-// Update Lightbox Image with Transition
-function updateLightboxImage() {
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.classList.remove('show');
-    setTimeout(() => {
-        lightboxImg.src = images[lightboxCurrentIndex].src;
-        lightboxImg.alt = images[lightboxCurrentIndex].alt;
-        lightboxImg.classList.add('show');
-    }, 50);
-}
-
-// Handle Keyboard Navigation
-function handleKeyNavigation(event) {
-    if (event.key === 'ArrowRight') {
-        nextImage();
-    } else if (event.key === 'ArrowLeft') {
-        prevImage();
-    } else if (event.key === 'Escape') {
-        closeLightbox();
-    }
-}
     </script>
-
     <footer>
         <div class="footer-social">
             <a href="https://www.instagram.com/arts_fine_finishes" target="_blank">
