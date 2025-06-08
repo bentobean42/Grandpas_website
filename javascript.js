@@ -68,7 +68,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDfHHOOTEy-p5HA4P5OOohqNZJAnj3cfr4",
   authDomain: "reviews-6057c.firebaseapp.com",
   projectId: "reviews-6057c",
-  storageBucket: "reviews-6057c.firebasestorage.app", // <-- Fixed: appspot.com, not firebasestorage.app
+  storageBucket: "reviews-6057c.appspot.com", // <-- Fixed: appspot.com, not firebasestorage.app
   messagingSenderId: "73309790767",
   appId: "1:73309790767:web:eebb406e7ee6631c231cda",
   measurementId: "G-4F8Y8B97M6"
@@ -147,6 +147,7 @@ function displayReviews(reviews) {
             <p class="text-text-general leading-relaxed mb-4">
                 ${review.text}
             </p>
+            ${review.photoURL ? `<img src="${review.photoURL}" alt="Customer uploaded photo" class="w-full h-auto rounded-md mb-4 object-cover" onerror="this.style.display='none';">` : ''}
             <div class="text-sm text-text-general">
                 — ${review.reviewerName}, ${review.timestamp && review.timestamp.toDate ? new Date(review.timestamp.toDate()).toLocaleDateString() : ""}
             </div>
@@ -194,6 +195,7 @@ async function submitReview(event) {
     const title = form['review-title'].value.trim();
     const text = form['review-text'].value.trim();
     const reviewerName = form['reviewer-name'].value.trim();
+    const photoFile = form['review-photo'].files[0];
 
     if (!rating || !title || !text || !reviewerName) {
         showMessageBox("Please fill in all required fields (Rating, Title, Review, Name).", "error");
@@ -206,6 +208,24 @@ async function submitReview(event) {
         submitButton.textContent = 'Submitting...';
     }
 
+    let photoURL = '';
+    if (photoFile) {
+        try {
+            const storageRef = ref(storage, `review_photos/${auth.currentUser.uid}/${photoFile.name}_${Date.now()}`);
+            const uploadTask = await uploadBytes(storageRef, photoFile);
+            photoURL = await getDownloadURL(uploadTask.ref);
+            showMessageBox("Photo uploaded successfully!", "success");
+        } catch (error) {
+            console.error("Error uploading photo:", error);
+            showMessageBox("Error uploading photo. Please try again.", "error");
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit Review';
+            }
+            return;
+        }
+    }
+
     try {
         const appId = firebaseConfig.appId;
         await addDoc(collection(db, `artifacts/${appId}/public/data/reviews`), {
@@ -213,6 +233,7 @@ async function submitReview(event) {
             title,
             text,
             reviewerName,
+            photoURL,
             timestamp: serverTimestamp(),
             userId: auth.currentUser.uid,
             isVerifiedPurchase: true
@@ -270,51 +291,3 @@ window.addEventListener('DOMContentLoaded', async () => {
         showMessageBox("Failed to load the review page. Please try again later.", "error");
     }
 });
-  
-document.addEventListener("DOMContentLoaded", function () {
-    let video1 = document.getElementById("video1");
-    let video2 = document.getElementById("video2");
-    let player1, player2;
-
-    // Load YouTube API
-    function onYouTubeIframeAPIReady() {
-        player1 = new YT.Player('video1', {
-            events: {
-                'onStateChange': onPlayerStateChange
-            }
-        });
-
-        player2 = new YT.Player('video2', {
-            events: {
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    }
-
-    // Handle video state change
-    function onPlayerStateChange(event) {
-        if (event.data === YT.PlayerState.ENDED) {
-            if (event.target === player1) {
-                video1.style.display = "none";
-                video2.style.display = "block";
-                player2.playVideo();
-            } else if (event.target === player2) {
-                video2.style.display = "none";
-                video1.style.display = "block";
-                player1.playVideo();
-            }
-        }
-    }
-
-    // Load the YouTube IFrame Player API
-    let tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    let firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    // Make the API function available globally
-    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-});
-        document.querySelector('.sidebar-tab').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('open');
-        });
