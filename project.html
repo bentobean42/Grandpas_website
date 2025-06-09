@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Gallery - Arts Fine Finishes</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="module" src="javascript.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -137,11 +138,6 @@
     const params = new URLSearchParams(window.location.search);
     const projectId = params.get('id');
     const project = projects.find(p => p.id === projectId);
-
-    // Sidebar toggle
-    document.querySelector('.sidebar-tab').addEventListener('click', function() {
-        document.querySelector('.sidebar').classList.toggle('open');
-    });
 
     // Render project if found
     if (project) {
